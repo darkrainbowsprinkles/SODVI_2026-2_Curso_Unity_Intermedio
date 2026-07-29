@@ -1,18 +1,41 @@
+using FPS.Core;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace FPS.Combat
 {
     public class Gun : MonoBehaviour
     {
-        public void Fire()
+        [SerializeField] Transform muzzle;
+        [SerializeField] GameObject muzzleFlashEffect;
+        [SerializeField] GameObject hitEffect;
+        Animator animator;
+        CinemachineImpulseSource impulseSource;
+
+        public void Fire(float damage, float range)
         {
+            Instantiate(muzzleFlashEffect, muzzle);
+            animator.Play("Gun Animation", 0, 0f);
+            impulseSource.GenerateImpulse();
+
             Vector3 cameraPosition = Camera.main.transform.position;
             Vector3 cameraForward = Camera.main.transform.forward;
 
-            if (Physics.Raycast(cameraPosition, cameraForward, out RaycastHit hit, Mathf.Infinity))
+            if (Physics.Raycast(cameraPosition, cameraForward, out RaycastHit hit, range))
             {
-                print(hit.transform.name);
+                if (hit.transform.TryGetComponent(out Health health))
+                {
+                    health.TakeDamage(damage);
+                }
+
+                Instantiate(hitEffect, hit.point, Quaternion.identity);
             }
+        }
+
+        void Awake()
+        {
+            animator = GetComponentInParent<Animator>();
+            impulseSource = GetComponent<CinemachineImpulseSource>();
         }
     }
 }

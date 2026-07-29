@@ -35,8 +35,13 @@ namespace FPS.Control
         void HandleFire()
         {
             InputAction fireAction = playerInput.actions["Fire"];
+            GunSO currentGunSO = fighter.GetCurrentGunSO();
 
-            if (fireAction.WasPressedThisFrame())
+            if (currentGunSO.IsAutomatic() && fireAction.IsPressed())
+            {
+                fighter.Fire();
+            }
+            else if (!currentGunSO.IsAutomatic() && fireAction.WasPressedThisFrame())
             {
                 fighter.Fire();
             }

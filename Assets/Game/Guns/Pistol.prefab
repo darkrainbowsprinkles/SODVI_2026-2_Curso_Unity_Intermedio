@@ -91,6 +91,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4832198747948775765, guid: 3e559f073a688f645b2d16793cc249a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3416
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832198747948775765, guid: 3e559f073a688f645b2d16793cc249a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1778
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832198747948775765, guid: 3e559f073a688f645b2d16793cc249a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6212
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875871105327935109, guid: 3e559f073a688f645b2d16793cc249a7, type: 3}
+      propertyPath: DefaultVelocity.y
+      value: -0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 8766051516635812023, guid: 3e559f073a688f645b2d16793cc249a7, type: 3}
       propertyPath: m_Name
       value: Pistol

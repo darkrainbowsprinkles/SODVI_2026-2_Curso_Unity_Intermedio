@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d87a2e5e2398ca47b61d300d18dc90e, type: 3}
   m_Name: AK-47
   m_EditorClassIdentifier: Assembly-CSharp::FPS.Combat.GunSO
-  gunPrefab: {fileID: 0}
-  damage: 30
-  range: 40
-  cooldown: 1
-  isAutomatic: 0
+  gunPrefab: {fileID: 8411076215629454064, guid: 7619bd57fab8cac4a81861af72c2c0a8, type: 3}
+  damage: 20
+  range: 60
+  cooldown: 0.1
+  isAutomatic: 1
+  ammoType: 2

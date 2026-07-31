@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::FPS.Combat.GunSO
   gunPrefab: {fileID: 252511066605575560, guid: 2df757179efd84c4aa8523edd57afd89, type: 3}
-  damage: 5
-  range: 90
-  cooldown: 0.1
+  damage: 10
+  range: 40
+  cooldown: 0.5
   isAutomatic: 0

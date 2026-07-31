@@ -10,6 +10,7 @@ namespace FPS.Combat
         [SerializeField] float range = 40f;
         [SerializeField] float cooldown = 1f;
         [SerializeField] bool isAutomatic;
+        [SerializeField] AmmoType ammoType;
 
         public Gun Spawn(Transform container)
         {
@@ -34,6 +35,11 @@ namespace FPS.Combat
         public bool IsAutomatic()
         {
             return isAutomatic;
+        }
+
+        public AmmoType GetAmmoType()
+        {
+            return ammoType;
         }
     }
 }

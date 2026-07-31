@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 592505681088186332}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,6 +225,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FPS.Combat.Fighter
   defaultGunSO: {fileID: 11400000, guid: e9f6d349d351cc14c9a897ffb1a02fd6, type: 2}
   gunContainer: {fileID: 0}
+  ammoSlots:
+  - ammoType: 0
+    ammoAmount: 10
+  - ammoType: 1
+    ammoAmount: 20
+  - ammoType: 2
+    ammoAmount: 6
 --- !u!114 &592505681088186332
 MonoBehaviour:
   m_ObjectHideFlags: 0

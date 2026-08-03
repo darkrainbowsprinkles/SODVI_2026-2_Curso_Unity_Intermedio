@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,10 +9,14 @@ namespace FPS.Combat
         [SerializeField] GunSO defaultGunSO;
         [SerializeField] Transform gunContainer;
         [SerializeField] AmmoSlot[] ammoSlots;
+        [SerializeField] AmmoIcon[] ammoIcons;
         GunSO currentGunSO;
         Gun currentGun;
         float timeSinceLastFire = Mathf.Infinity;
         Dictionary<AmmoType, int> ammoLookup;
+
+        public event Action OnGunEquipped;
+        public event Action OnAmmoAdjusted;
 
         public GunSO GetCurrentGunSO()
         {
@@ -27,11 +32,18 @@ namespace FPS.Combat
 
             currentGunSO = gunSO;
             currentGun = gunSO.Spawn(gunContainer);
+            OnGunEquipped?.Invoke();
         }
 
         public void AdjustAmmo(AmmoType ammoType, int ammoAmount)
         {
             ammoLookup[ammoType] += ammoAmount;
+            OnAmmoAdjusted?.Invoke();
+        }
+
+        public int GetAmmo(AmmoType ammoType)
+        {
+            return ammoLookup[ammoType];
         }
 
         public void Fire()
@@ -54,11 +66,31 @@ namespace FPS.Combat
             print($"Ammo type: {currentAmmoType} - {GetAmmo(currentAmmoType)}");
         }
 
+        public Sprite GetIcon(AmmoType ammoType)
+        {
+            foreach (AmmoIcon ammoIcon in ammoIcons)
+            {
+                if (ammoIcon.ammoType == ammoType)
+                {
+                    return ammoIcon.icon;
+                }
+            }
+
+            return null;
+        }
+
         [System.Serializable]
         struct AmmoSlot
         {
             public AmmoType ammoType;
             public int ammoAmount;
+        }
+
+        [System.Serializable]
+        struct AmmoIcon
+        {
+            public AmmoType ammoType;
+            public Sprite icon;
         }
 
         void Awake()
@@ -80,11 +112,6 @@ namespace FPS.Combat
             {
                 ammoLookup[ammoSlot.ammoType] = ammoSlot.ammoAmount;
             }
-        }
-
-        int GetAmmo(AmmoType ammoType)
-        {
-            return ammoLookup[ammoType];
         }
     }
 }

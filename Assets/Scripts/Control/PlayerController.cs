@@ -30,6 +30,7 @@ namespace FPS.Control
         {
             HandleFire();
             HandleMovement();
+            HandleZoom();
         }
 
         void HandleFire()
@@ -59,6 +60,12 @@ namespace FPS.Control
             {
                 mover.MoveTo(CalculateMovement(), walkSpeedFraction);
             }
+        }
+
+        void HandleZoom()
+        {
+            InputAction zoomAction = playerInput.actions["Zoom"];
+            fighter.ToggleZoom(zoomAction.IsPressed());
         }
 
         Vector3 CalculateMovement()

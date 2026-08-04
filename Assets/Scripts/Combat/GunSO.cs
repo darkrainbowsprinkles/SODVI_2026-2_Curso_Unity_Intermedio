@@ -9,9 +9,12 @@ namespace FPS.Combat
         [SerializeField] float damage = 30f;
         [SerializeField] float range = 40f;
         [SerializeField] float cooldown = 1f;
+        [SerializeField] float zoomFOV = 40f;
         [SerializeField] bool isAutomatic;
+        [SerializeField] bool canZoom;
         [SerializeField] AmmoType ammoType;
         [SerializeField] Texture2D crosshair;
+        [SerializeField] Texture2D scope;
         [SerializeField] Sprite icon;
 
         public Gun Spawn(Transform container)
@@ -34,9 +37,19 @@ namespace FPS.Combat
             return cooldown;
         }
 
+        public float GetZoomFOV()
+        {
+            return zoomFOV;
+        }
+
         public bool IsAutomatic()
         {
             return isAutomatic;
+        }
+
+        public bool CanZoom()
+        {
+            return canZoom;
         }
 
         public AmmoType GetAmmoType()
@@ -47,6 +60,11 @@ namespace FPS.Combat
         public Texture2D GetCrosshair()
         {
             return crosshair;
+        }
+
+        public Texture2D GetScope()
+        {
+            return scope;
         }
 
         public Sprite GetIcon()

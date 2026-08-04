@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace FPS.Combat
@@ -10,9 +11,13 @@ namespace FPS.Combat
         [SerializeField] Transform gunContainer;
         [SerializeField] AmmoSlot[] ammoSlots;
         [SerializeField] AmmoIcon[] ammoIcons;
+        [SerializeField] CinemachineCamera firstPersonCamera;
+        [SerializeField] Camera gunCamera;
         GunSO currentGunSO;
         Gun currentGun;
         float timeSinceLastFire = Mathf.Infinity;
+        float defaultFOV;
+        bool isZooming;
         Dictionary<AmmoType, int> ammoLookup;
 
         public event Action OnGunEquipped;
@@ -21,6 +26,11 @@ namespace FPS.Combat
         public GunSO GetCurrentGunSO()
         {
             return currentGunSO;
+        }
+
+        public bool IsZooming()
+        {
+            return isZooming;
         }
 
         public void EquipGun(GunSO gunSO)
@@ -66,6 +76,22 @@ namespace FPS.Combat
             print($"Ammo type: {currentAmmoType} - {GetAmmo(currentAmmoType)}");
         }
 
+        public void ToggleZoom(bool isZooming)
+        {
+            this.isZooming = isZooming;
+
+            if (isZooming && currentGunSO.CanZoom())
+            {
+                firstPersonCamera.Lens.FieldOfView = currentGunSO.GetZoomFOV();
+                gunCamera.fieldOfView = currentGunSO.GetZoomFOV();
+            }
+            else
+            {
+                firstPersonCamera.Lens.FieldOfView = defaultFOV;
+                gunCamera.fieldOfView = defaultFOV;
+            }
+        }
+
         public Sprite GetIcon(AmmoType ammoType)
         {
             foreach (AmmoIcon ammoIcon in ammoIcons)
@@ -97,6 +123,7 @@ namespace FPS.Combat
         {
             CreateAmmoLookup();
             EquipGun(defaultGunSO);
+            defaultFOV = firstPersonCamera.Lens.FieldOfView;
         }
 
         void Update()

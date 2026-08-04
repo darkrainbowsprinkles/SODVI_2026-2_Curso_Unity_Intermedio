@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d87a2e5e2398ca47b61d300d18dc90e, type: 3}
+  m_Name: Sniper
+  m_EditorClassIdentifier: Assembly-CSharp::FPS.Combat.GunSO
+  gunPrefab: {fileID: 7030919984393717313, guid: 73255cfc6be005a48bd2991ddc271ec1, type: 3}
+  damage: 100
+  range: 90
+  cooldown: 1
+  zoomFOV: 30
+  isAutomatic: 0
+  canZoom: 1
+  ammoType: 2
+  crosshair: {fileID: 2800000, guid: a8e5031638aa2204082c6f51d5fe1edb, type: 3}
+  scope: {fileID: 2800000, guid: 60d5ee4b6c45dec4e9179c2c7d905d7a, type: 3}
+  icon: {fileID: 21300000, guid: 2f3f1c9ee0905e3419760cdb631a0150, type: 3}

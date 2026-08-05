@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8704745107643294205}
   - component: {fileID: 3150550942385654391}
   - component: {fileID: 2528810507598183913}
+  - component: {fileID: -8309438428592035574}
   - component: {fileID: 4602070348061233530}
   - component: {fileID: 3762653279331928709}
   - component: {fileID: 1526056720522155958}
@@ -73,7 +74,7 @@ NavMeshAgent:
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 1000
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -81,6 +82,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &-8309438428592035574
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495553574882877064}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44c590240374f734884d544f7ff5408d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4602070348061233530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,4 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97afa21cc165fb4989b0960e38270d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FPS.Control.AIController
-  moveSpeedFraction: 0.5
+  chaseSpeedFraction: 0.5
+  chaseRange: 10
+  attackRange: 1.5

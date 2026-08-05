@@ -1,3 +1,4 @@
+using FPS.Core;
 using FPS.Movement;
 using UnityEngine;
 
@@ -7,22 +8,66 @@ namespace FPS.Control
     {
         [SerializeField, Range(0,1)] float chaseSpeedFraction = 0.5f;
         [SerializeField] float chaseRange = 10f;
+        [SerializeField] float attackRange = 1.5f;
+        [SerializeField] float hitRange = 3f;
+        [SerializeField] float attackDamage = 30f;
         GameObject player;
         Mover mover;
+        Animator animator;
+        Health health;
 
         void Awake()
         {
             player = GameObject.FindWithTag("Player");
             mover = GetComponent<Mover>();
+            animator = GetComponent<Animator>();
+            health = GetComponent<Health>();
         }
 
         void Update()
         {
+            if (health.IsDead())
+            {
+                return;
+            }
+
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-            if (distanceToPlayer < chaseRange)
+            if (distanceToPlayer < attackRange)
             {
-                mover.MoveTo(player.transform.position, chaseSpeedFraction);
+                AttackBehavior();
+            }
+            else if (distanceToPlayer < chaseRange)
+            {
+                ChaseBehavior();
+            }
+            else
+            {
+                mover.Stop();
+            }
+        }
+
+        void AttackBehavior()
+        {
+            mover.Stop();
+            animator.SetTrigger("attack");
+            mover.LookAt(player);
+        }
+
+        void ChaseBehavior()
+        {
+            animator.ResetTrigger("attack");
+            mover.MoveTo(player.transform.position, chaseSpeedFraction);
+        }
+
+        // Called in Unity Events
+        void Hit()
+        {
+            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+
+            if (distanceToPlayer < hitRange)
+            {
+                player.GetComponent<Health>().TakeDamage(attackDamage);
             }
         }
 

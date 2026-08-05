@@ -1,4 +1,5 @@
 using FPS.Combat;
+using FPS.Core;
 using FPS.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,12 +13,14 @@ namespace FPS.Control
         PlayerInput playerInput;
         Mover mover;
         Fighter fighter;
+        Health health;
 
         void Awake()
         {
             playerInput = GetComponent<PlayerInput>();
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
         }
 
         void Start()
@@ -28,6 +31,11 @@ namespace FPS.Control
 
         void Update()
         {
+            if (health.IsDead())
+            {
+                return;
+            }
+
             HandleFire();
             HandleMovement();
             HandleZoom();

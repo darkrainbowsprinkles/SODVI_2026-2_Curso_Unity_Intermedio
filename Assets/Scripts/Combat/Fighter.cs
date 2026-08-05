@@ -73,7 +73,6 @@ namespace FPS.Combat
             currentGun.Fire(currentGunSO.GetDamage(), currentGunSO.GetRange());
             timeSinceLastFire = 0f;
             AdjustAmmo(currentAmmoType, -1);
-            print($"Ammo type: {currentAmmoType} - {GetAmmo(currentAmmoType)}");
         }
 
         public void ToggleZoom(bool isZooming)

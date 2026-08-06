@@ -10,6 +10,7 @@ namespace FPS.Movement
         CharacterController controller;
         NavMeshAgent agent;
         Animator animator;
+        float verticalVelocity;
 
         public void MoveTo(Vector3 destination, float speedFraction)
         {
@@ -53,11 +54,33 @@ namespace FPS.Movement
 
         void Update()
         {
-            if (animator == null)
+            if (controller != null)
             {
-                return;
+                ApplyGravity();
             }
 
+            if (animator != null)
+            {
+                UpdateBlendTree();
+            }
+        }
+
+        void ApplyGravity()
+        {
+            if (controller.isGrounded && verticalVelocity <= 0)
+            {
+                verticalVelocity = Physics.gravity.y * Time.deltaTime;
+            }
+            else
+            {
+                verticalVelocity += Physics.gravity.y * Time.deltaTime;
+            }
+
+            controller.Move(verticalVelocity * Vector3.up * Time.deltaTime);
+        }
+
+        void UpdateBlendTree()
+        {
             float localVelocity = transform.InverseTransformDirection(agent.velocity).magnitude;
             animator.SetFloat("movementSpeed", localVelocity, 0.1f, Time.deltaTime);
         }

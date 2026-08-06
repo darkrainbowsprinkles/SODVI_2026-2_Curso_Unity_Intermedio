@@ -32,8 +32,9 @@ namespace FPS.Control
             }
 
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+            bool isAttacking = animator.GetCurrentAnimatorStateInfo(0).IsName("Attack");
 
-            if (distanceToPlayer < attackRange)
+            if (isAttacking || distanceToPlayer < attackRange)
             {
                 AttackBehavior();
             }
@@ -43,7 +44,7 @@ namespace FPS.Control
             }
             else
             {
-                mover.Stop();
+                IdleBehavior();
             }
         }
 
@@ -58,6 +59,12 @@ namespace FPS.Control
         {
             animator.ResetTrigger("attack");
             mover.MoveTo(player.transform.position, chaseSpeedFraction);
+        }
+
+        void IdleBehavior()
+        {
+            mover.Stop();
+            animator.ResetTrigger("attack");
         }
 
         // Called in Unity Events

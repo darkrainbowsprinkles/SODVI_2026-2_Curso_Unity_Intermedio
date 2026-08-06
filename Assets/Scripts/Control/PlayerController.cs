@@ -14,6 +14,7 @@ namespace FPS.Control
         Mover mover;
         Fighter fighter;
         Health health;
+        AggroGroup aggroGroup;
 
         void Awake()
         {
@@ -21,6 +22,7 @@ namespace FPS.Control
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
+            aggroGroup = FindAnyObjectByType<AggroGroup>();
         }
 
         void Start()
@@ -31,6 +33,11 @@ namespace FPS.Control
 
         void Update()
         {
+            if (aggroGroup != null && aggroGroup.GroupDead())
+            {
+                return;
+            }
+
             if (health.IsDead())
             {
                 return;

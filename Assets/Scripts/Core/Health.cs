@@ -8,7 +8,7 @@ namespace FPS.Core
     {
         [SerializeField] float maxHealth = 200f;
         [SerializeField] UnityEvent onDamageTaken;
-        [SerializeField] UnityEvent onDie;
+        public UnityEvent onDie;
         float currentHealth;
 
         public bool IsDead()

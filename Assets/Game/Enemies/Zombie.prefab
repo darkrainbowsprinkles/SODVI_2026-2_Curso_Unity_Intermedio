@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 99735bfbec68f6f4a81aaa06e1c72289, type: 3}
+    - target: {fileID: 1526056720522155958, guid: 5c741fa3fc1dc2f4cbe178623ed3d440, type: 3}
+      propertyPath: chaseSpeedFraction
+      value: 0.452
+      objectReference: {fileID: 0}
     - target: {fileID: 3762653279331928709, guid: 5c741fa3fc1dc2f4cbe178623ed3d440, type: 3}
       propertyPath: maxSpeed
       value: 6

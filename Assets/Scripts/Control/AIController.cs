@@ -15,6 +15,7 @@ namespace FPS.Control
         Mover mover;
         Animator animator;
         Health health;
+        bool isAggravated;
 
         void Awake()
         {
@@ -22,6 +23,16 @@ namespace FPS.Control
             mover = GetComponent<Mover>();
             animator = GetComponent<Animator>();
             health = GetComponent<Health>();
+        }
+
+        void OnEnable()
+        {
+            health.onDamageTaken.AddListener(Aggravate);
+        }
+
+        void OnDisable()
+        {
+            health.onDamageTaken.RemoveListener(Aggravate);
         }
 
         void Update()
@@ -38,7 +49,7 @@ namespace FPS.Control
             {
                 AttackBehavior();
             }
-            else if (distanceToPlayer < chaseRange)
+            else if (isAggravated || distanceToPlayer < chaseRange)
             {
                 ChaseBehavior();
             }
@@ -53,6 +64,7 @@ namespace FPS.Control
             mover.Stop();
             animator.SetTrigger("attack");
             mover.LookAt(player);
+            isAggravated = false;
         }
 
         void ChaseBehavior()
@@ -65,6 +77,11 @@ namespace FPS.Control
         {
             mover.Stop();
             animator.ResetTrigger("attack");
+        }
+
+        void Aggravate()
+        {
+            isAggravated = true;
         }
 
         // Called in Unity Events

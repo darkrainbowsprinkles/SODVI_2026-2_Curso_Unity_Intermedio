@@ -49,6 +49,7 @@ namespace FPS.UI
             crosshairImage.texture = currentGunSO.GetCrosshair();
             gunIconImage.sprite = currentGunSO.GetIcon();
             ammoIconImage.sprite = fighter.GetIcon(currentGunSO.GetAmmoType());
+            RefreshAmmoUI();
         }
 
         void RefreshAmmoUI()

@@ -7,7 +7,7 @@ namespace FPS.Core
     public class Health : MonoBehaviour
     {
         [SerializeField] float maxHealth = 200f;
-        [SerializeField] UnityEvent onDamageTaken;
+        public UnityEvent onDamageTaken;
         public UnityEvent onDie;
         float currentHealth;
 
